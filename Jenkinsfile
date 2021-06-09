@@ -73,6 +73,15 @@ node {
             grafanaimg.pull() // make sure
             grafanaimg.run('-p 9090:9090 --name myprometheus --link mygrafana')
         }
-    }   
+    }
+    
+     stage ('send notification') {
+            slackSend baseUrl: 'https://hooks.slack.com/services/', 
+            channel: '#jenkins-notification', 
+            color: 'good', 
+            message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER}; console: ${BUILD_URL}console ",
+            teamDomain: 'praveenlearning', 
+            tokenCredentialId: 'slacknotification'
+    }
 }
 
