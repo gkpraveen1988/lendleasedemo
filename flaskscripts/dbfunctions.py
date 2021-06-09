@@ -42,8 +42,9 @@ def deleteUser(inputData):
 def getUser(inputData):
     cursor,db,constatus = connecttodb()
     cursor = db.cursor(dictionary=True)
-    sql = "select * from customerdata"
-    cursor.execute(sql)
+    sql = "select * from customerdata where custnumber like %s"
+    val = (inputData['custid'],)
+    cursor.execute(sql,val)
     rows = cursor.fetchall()
     return rows[0]
     '''
