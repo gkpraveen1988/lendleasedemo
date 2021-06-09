@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: mydb-pod
+  labels:
+    author: praveen
+    type: database
+spec:
+  containers:
+    - name: mysqlserver
+      image: registry.hub.docker.com/praveen88/personalimages:mysqlserver_1.0
+      ports:
+        - containerPort: 3306
+

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: prometheus-pod
+  labels:
+    author: praveen
+    type: prometheus
+spec:
+  containers:
+    - name: prometheus-container
+      image: registry.hub.docker.com/praveen88/personalimages:myprometheus_1.0
+      ports:
+        - containerPort: 9090
