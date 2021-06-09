@@ -1,5 +1,7 @@
 from dbconnection import *
 import json
+import time
+import datetime
 
 # FUNCTION TO RUN THE QUERIES WITH SQL COMMANDS
 def runSqlcommand(sql,val,stat):
@@ -18,12 +20,14 @@ def runSqlcommand(sql,val,stat):
 
 # FUCNTION TO CREATE AND UPDATE THE USER ON DUPLICATE KEY
 def createUpdateUser(inputData):
-    sql = "insert into customerdata (custnumber,fname,mname,lname,dob,gender,department,location) \
-        values (%s,%s,%s,%s,%s,%s,%s,%s)"
+    ts = time.time()
+    timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    sql = "insert into customerdata (custnumber,fname,mname,lname,dob,gender,department,location,created) \
+        values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
     val = (str(inputData['custnumber']),str(inputData['fname']),str(inputData['mname']),\
       str(inputData['lname']),str(inputData['dob']),str(inputData['gender']),str(inputData['department']),\
-      str(inputData['location']))
+      str(inputData['location']),timestamp)
 
     status = 'Inserted'
     returndict = runSqlcommand(sql,val,status)  # calling another function to execute the sql commands
@@ -58,6 +62,7 @@ def getUser(inputData):
 
 if __name__ == "__main__":
     inputData = {}
-    inputData['custid'] = 1
-    mydict = getUser(inputData)
+    inputData['custid'] = 21
+    inputData['fname'] = 'rascal'
+    mydict = createUpdateUser(inputData)
     print(mydict)
