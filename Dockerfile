@@ -1,4 +1,4 @@
-FROM praveen88/personalimages:myapp_1.0
+FROM python:3.9.1
 WORKDIR /app
 COPY flaskscripts /app
 EXPOSE 5000
